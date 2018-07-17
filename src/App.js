@@ -23,7 +23,10 @@ const flexCol = {
 }
 
 class App extends Component {
-  
+  constructor(props, context) {
+    super(props, context);
+    this._unSplash = this._unSplash.bind(this);
+  }
   render() {
  
     return (
@@ -36,8 +39,29 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <ImageContainer />
+        {this._unSplash()}
       </div>
     );
+  }
+
+  _unSplash() {
+    var _handleRequest = function(){
+      if(this.readyState == 4 && this.status == 200){ //Explain this in a bit.
+        var response = JSON.parse(request.responseText);
+
+        // return(<Image src={response.results[0].urls.thumb} />);
+        for (var i = 0; i < response.results.length; i++) {
+          console.log(response.results[i].urls.thumb);
+        }
+      }
+    }
+
+    let url = "https://api.unsplash.com/search/photos/?query=dog"; //We are searching for the query home.
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = _handleRequest;
+    request.open('GET',url,true);
+    request.setRequestHeader('Authorization','Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'); // Unique client ID.
+    request.send();
   }
 }
 
@@ -55,6 +79,8 @@ class Image extends Component {
 class ImageContainer extends Component {
   constructor(props, context) {
     super(props, context);
+    // this._unSplash = this._unSplash.bind(this);
+
     this._buildImages = this._buildImages.bind(this);
   }
   render() {
@@ -65,6 +91,28 @@ class ImageContainer extends Component {
     )
   }
 
+  // _unSplash() {
+  //   var _handleRequest = function(){
+  //     if(this.readyState == 4 && this.status == 200){ //Explain this in a bit.
+  //       var response = JSON.parse(request.responseText);
+  //       var arr = []
+  //       // return(<Image src={response.results[0].urls.thumb} />);
+  //       for (var i = 0; i < response.results.length; i++) {
+  //         arr.push (response.results[i].urls.thumb)
+  //         console.log(arr);
+  //       }
+  //     }
+  //   }
+
+  //   let url = "https://api.unsplash.com/search/photos/?query=dog"; //We are searching for the query home.
+  //   var request = new XMLHttpRequest();
+  //   request.onreadystatechange = _handleRequest;
+  //   request.open('GET',url,true);
+  //   request.setRequestHeader('Authorization','Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'); // Unique client ID.
+  //   request.send();
+  // }
+
+
   _buildImages(array) {
 
     let mapImages = array.map((item, i) => {
@@ -74,7 +122,6 @@ class ImageContainer extends Component {
     return mapImages;
   }
 }
-
 
 const doggos = [
   {
@@ -178,6 +225,8 @@ const doggos = [
     link: 'https://unsplash.com'
   }
 ];
+
+
 
 console.log(doggos.length);
 
