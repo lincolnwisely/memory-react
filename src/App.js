@@ -2,32 +2,10 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Topics from "./components/Topics.jsx";
-
-// import Image from 'components/Image.jsx';
+import { shuffle } from "./helpers.js";
 import ImageContainer from "./components/ImageContainer.jsx";
 
-// import 'idk.js';
-
-// styles
-
-const flexStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  alignContent: "space-around",
-  margin: "0 auto",
-  width: "80%"
-};
-
-// const flexCol = {
-//   display: "flex",
-//   flexDirection: "column",
-//   padding: "10px"
-// };
-
-// Data method
-
 const API = "https://api.unsplash.com/search/photos/?query=";
-// const DEFAULT_QUERY = 'dog'; // to be changed...
 
 class App extends Component {
   constructor(props) {
@@ -38,17 +16,16 @@ class App extends Component {
       query: "dogs"
     };
 
-    this.duplicateHits = this.duplicateHits.bind(this);
     this.queryChange = this.queryChange.bind(this);
   }
 
   queryChange(e) {
     var querVal = e.target.value;
-    console.log(querVal);
     this.setState({ query: querVal });
   }
 
   componentDidMount() {
+    console.log(this.state.query);
     fetch(API + this.state.query, {
       method: "GET",
       headers: {
@@ -59,12 +36,18 @@ class App extends Component {
       response => {
         if (response.ok) {
           response.json().then(data => {
-            let dupArray = data.results;
-            this.duplicateHits(dupArray);
-            this.setState({ hits: dupArray });
-            console.log("dupArray", dupArray);
-            // this.setState({ hits: data.results })
-            // how and ... where... do i duplicate the hits array in state?
+            let hits = data.results;
+
+            // Duplicate array before passing to state.
+            hits = hits.reduce((res, current, index, array) => {
+              return res.concat([current, current]);
+            }, []);
+
+            shuffle(hits);
+
+            this.setState({ hits });
+
+            console.log("hits", hits);
           });
 
           console.log("sucecss?");
@@ -78,16 +61,29 @@ class App extends Component {
     );
   }
 
-  duplicateHits(myArray) {
-    myArray.reduce((res, current, index, array) => {
-      return res.concat([current, current]);
-    }, []);
-    console.log("hello?");
-  }
+  // duplicateHits() {
+  //   const hitsArray = { ...this.state.hits };
+  //   console.log("hits", hitsArray);
+
+  //   hitsArray = hitsArray.reduce((res, current, index, array) => {
+  //     return res.concat([current, current]);
+  //   }, []);
+
+  //   this.setState({ hits: hitsArray });
+
+  //   this.setState(prevState => ({
+  //     arrayvar: [...prevState.arrayvar, newelement]
+  //   }));
+
+  //   console.log("hello?");
+  //   // console.log(hits);
+  // }
+
+  shuffleArray(arr) {}
 
   render() {
-    const { hits } = this.state;
-    console.log("hits", hits);
+    // const { hits } = this.state;
+    // console.log("hits", hits);
     return (
       <div className="App">
         <header className="App-header">
@@ -98,7 +94,11 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Topics queryvalue={this.state.query} queryChange={this.queryChange} />
-        <ImageContainer style={flexStyle} images={this.state.hits} />
+        <ImageContainer
+          images={this.state.hits}
+          query={this.state.query}
+          duplicateHits={this.duplicateHits}
+        />
       </div>
     );
   }

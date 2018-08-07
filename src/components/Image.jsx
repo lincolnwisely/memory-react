@@ -1,16 +1,53 @@
 import React from "react";
 
-class Image extends React.Component {
-  // const { imgs } = this.props.images;
+const imgStyle = {
+  width: "100%",
+  maxWidth: "300px",
+  objectFit: "cover",
+  objectPosition: "center",
+  height: "250px"
+};
 
+const fLeft = {
+  float: "left",
+  maxWidth: "300px",
+  height: "250px",
+  padding: "5px",
+  position: "relative"
+};
+
+const pCredit = {
+  fontFamily: "'Inconsolata', monospace",
+  color: "#ffffff",
+  position: "absolute",
+  bottom: "5px",
+  margin: "0",
+  fontSize: "10px",
+  textAlign: "center",
+  padding: "2px 0px 4px 0px",
+  background: "rgba(0,0,0,0.5)",
+  width: "300px",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-around"
+  // display: none;
+};
+
+const creditA = {
+  color: "#ffffff",
+  fontSize: "10px"
+};
+
+class Image extends React.Component {
   render() {
     return (
       <div>
-        {this.props.images.map(img => (
-          <div key={img.id}>
-            <img src={img.urls.small} alt="alt text" />
-            <p className="credit">
+        {this.props.images.map((img, i) => (
+          <div style={fLeft} key={i}>
+            <img style={imgStyle} src={img.urls.small} alt={this.props.query} />
+            <p className="credit" style={pCredit}>
               <a
+                style={creditA}
                 href="https://unsplash.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -19,6 +56,7 @@ class Image extends React.Component {
               </a>
               <br />
               <a
+                style={creditA}
                 href={img.user.links.self}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -31,21 +69,6 @@ class Image extends React.Component {
       </div>
     );
   }
-  // const Baskets = ({baskets}) => {
-  // const dateList = baskets.map((basket) => {
-  //     return (
-  //       <li
-  //           key={basket.id}>{basket.formatted_date}
-  //       </li>
-  //     )
-  //   });
-  // return (
-  //     <div className="list-group-item">
-  //       <h4>Shopping Trip Index</h4>
-  //       <div className="list-group">{dateList}</div>
-  //     </div>
-  //   );
-  // };
 }
 
 export default Image;
