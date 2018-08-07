@@ -34,8 +34,23 @@ unsplash.search.photos("dogs", 1)
   //     });
   // }
 
+// ----- START RANT
+//IDK WHAT TO DO WIHT THIS BUT IT HAS TO BE SOMETHING RIGHT??? 
+// function handleRequest(){
+//   if(this.readyState == 4 && this.status == 200){ //Explain this in a bit.
+//   console.log(JSON.parse(request.responseText));
+//    }
+// }
 
+// var url;
+// url = "https://api.unsplash.com/search/photos/?query=home"; //We are searching for the query home.
+// var request = new XMLHttpRequest();
+// request.onreadystatechange = handleRequest;
+// request.open('GET',url,true);
+// request.setRequestHeader('Authorization','Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'); // Unique client ID.
+// request.send();
 
+// ----- END RAND 
 
 let authenticationUrl = unsplash.auth.getAuthenticationUrl([
   "public",
@@ -197,3 +212,138 @@ function collections() {
      });
 
 }
+
+
+
+class ImageContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      data: []
+    }
+    // this._unSplash = this._unSplash.bind(this);
+    // this._buildImages = this._buildImages.bind(this);
+    // this._fetchdata = this._fetchdata.bind(this);
+
+  }
+
+
+  render() {
+    return (
+      <div style={flexStyle}>
+        {/* {this._buildImages(doggos)} */}
+        {/* {this._unSplash()} */}
+        {/* {this._fetchdata()} */}
+      </div>
+    )
+  }
+  
+
+
+  _fetchdata (query) {
+    let url = `https://api.unsplash.com/search/photos/?query=` + query;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Authorization" :'Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'
+      },
+    }).then((res) => {
+      if (res.ok) {
+        // Convert response to Json
+        res.json().then((data) => {
+
+          // this.setState() => {
+          //   data: data.results
+          // };
+          // data = data.results;
+          console.log(p)
+          // let mapImages = this.data.map((item, i) => {
+          //   return (<Image className='img' src={ item.urls.small } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
+          //   }
+          // );
+          // console.log(mapImages);
+  
+          return ;
+          
+        });
+      } else if (res.status == 401) {
+      alert("Oops! You are not authorized.");
+      }
+    }, function(e) {
+      alert("Error submitting form!");
+  });
+  
+  }
+
+
+  _unSplash() {
+    var _handleRequest = () => {
+      if(this.readyState === 4 && this.status === 200){ //Explain this in a bit.
+        var response = JSON.parse(request.responseText);
+        var arr = [];
+        // console.log(arr);
+        // console.log(response.results);
+        // return(<Image src={response.results[0].urls.thumb} />);
+        for (var i = 0; i < response.results.length; i++) {
+          arr.push(response.results[i]);
+        }
+        console.log(arr);
+
+
+        this.setState({
+          data: arr 
+        });
+        
+        console.log(this.state.data);
+
+        let mapImages = this.state.data.map((item, i) => {
+          return (<Image src={ item.links.self } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
+          }
+        );
+        console.log(mapImages);
+
+        return mapImages;
+        // return (<Image uName={ arr[i].user.name } uLink={ arr[i].user.links.self } key={arr[i].id}/>);
+      }
+    };
+
+    let url = "https://api.unsplash.com/search/photos/?query=dog";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = _handleRequest;
+    request.open('GET',url,true);
+    request.setRequestHeader('Authorization','Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'); // Unique client ID.
+    request.send();
+  }
+
+
+
+
+  //id, links.self, user.links.self, user.name 
+
+  _buildImages(array) {
+
+    let mapImages = array.map((item, i) => {
+      return (<Image src={ item.src } credit={ item.author } link={ item.link } key={i}/>);
+      }
+    );
+    return mapImages;
+  }
+}
+
+// Need to pass the query (defined by a click event on input)
+// Pass query to the fetch method
+
+// The fetching component should be a common parent component for all these components.
+// The loading indicator could be shown in the common parent component from the first criteria.
+// The componentDidMount() lifecycle method is the best place to fetch data. 
+
+
+// Parent container (need to store an array of data from fetch function)
+  
+  // Topics component
+      // input (onChange event determines query value, and click event will call the fetch method, passing along the query)
+      // 
+      // (future feature:)  pre-defined buttons (click event determines query value... will need to refactor)
+
+  // Image container component 
+      // images (data array item : src, author name author src, unsplash)
