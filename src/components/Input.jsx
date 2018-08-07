@@ -1,17 +1,17 @@
 import React from "react";
 
-class Input extends Component {
+class Input extends React.Component {
   render() {
     return (
       <div>
         <span>Or choose your own!</span>
         <input
           id="search"
+          type="text"
           value={this.props.queryvalue}
           onChange={this.props.queryChange}
-          defaultValue="dogs"
           ref={input => {
-            this.storeInput = input;
+            this.queryInput = input;
           }}
         />
         <button>Enter</button>

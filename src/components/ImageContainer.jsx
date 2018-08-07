@@ -1,31 +1,25 @@
-import React from 'react';
+import React from "react";
+import Image from "./Image.jsx";
 
-class ImageContainer extends Component {
+const imgStyle = {
+  width: "100%",
+  maxWidth: "300px"
+};
 
+class ImageContainer extends React.Component {
   // render() {
   //   return (
   //     <div style={flexStyle}>
-  //       {/* <Image source={this.props.images } images={this.props.images} /> */}
+  //       {/* <Image style={imgStyle} source={this.props.images } images={this.props.images} /> */}
   //     </div>
   //   )
   // }
+  // const { imgs } = this.props.images;
+  // console.log(this.props.images);
 
   render() {
-    const { imgs } = this.props.images;
-    console.log(this.props.images)
-      return (
-        <div>
-        {imgs.map(img =>
-          <div id={img.objectID}>
-            <img src={img.urls.small}/>
-            <p class="credit"><a href="https://unsplash.com/" target="_blank">via Unsplash</a><br/>
-            <a href={img.user.links.self} target="_blank">{ img.hits.user.name }</a></p>
-          </div>
-        )}
-      </div>
-      );
+    return <Image style={imgStyle} images={this.props.images} />;
   }
 }
-  
 
 export default ImageContainer;

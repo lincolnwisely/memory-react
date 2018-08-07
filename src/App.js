@@ -1,19 +1,14 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Input from "components/Input.jsx";
-import Topics from "components/Topics.jsx";
+import Topics from "./components/Topics.jsx";
 
 // import Image from 'components/Image.jsx';
-// import ImageContainer from 'components/ImageContainer.jsx';
+import ImageContainer from "./components/ImageContainer.jsx";
 
 // import 'idk.js';
 
 // styles
-const imgStyle = {
-  width: "100%",
-  maxWidth: "300px"
-};
 
 const flexStyle = {
   display: "flex",
@@ -23,11 +18,11 @@ const flexStyle = {
   width: "80%"
 };
 
-const flexCol = {
-  display: "flex",
-  flexDirection: "column",
-  padding: "10px"
-};
+// const flexCol = {
+//   display: "flex",
+//   flexDirection: "column",
+//   padding: "10px"
+// };
 
 // Data method
 
@@ -73,7 +68,7 @@ class App extends Component {
           });
 
           console.log("sucecss?");
-        } else if (response.status == 401) {
+        } else if (response.status === 401) {
           alert("Oops! You are not authorized.");
         }
       },
@@ -103,7 +98,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Topics queryvalue={this.state.query} queryChange={this.queryChange} />
-        {/* <ImageContainer images={this.state.hits}/> */}
+        <ImageContainer style={flexStyle} images={this.state.hits} />
       </div>
     );
   }

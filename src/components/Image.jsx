@@ -1,21 +1,35 @@
-import React from 'react';
+import React from "react";
 
-
-class Image extends Component {
+class Image extends React.Component {
+  // const { imgs } = this.props.images;
 
   render() {
-    const { imgs } = this.props.images;
-      return (
-        <div>
-        {imgs.map(img =>
-          <div id={img.objectID}>
-            <img src={img.urls.small}/>
-            <p class="credit"><a href="https://unsplash.com/" target="_blank">via Unsplash</a><br/>
-            <a href={img.user.links.self} target="_blank">{ img.hits.user.name }</a></p>
+    return (
+      <div>
+        {this.props.images.map(img => (
+          <div key={img.id}>
+            <img src={img.urls.small} alt="alt text" />
+            <p className="credit">
+              <a
+                href="https://unsplash.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                via Unsplash
+              </a>
+              <br />
+              <a
+                href={img.user.links.self}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {img.user.name}
+              </a>
+            </p>
           </div>
-        )}
+        ))}
       </div>
-      );
+    );
   }
   // const Baskets = ({baskets}) => {
   // const dateList = baskets.map((basket) => {
@@ -32,10 +46,6 @@ class Image extends Component {
   //     </div>
   //   );
   // };
-  
-  
-  
-
 }
 
 export default Image;
