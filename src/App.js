@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.query);
     fetch(API + this.state.query, {
       method: "GET",
       headers: {
@@ -49,8 +48,6 @@ class App extends Component {
 
             console.log("hits", hits);
           });
-
-          console.log("sucecss?");
         } else if (response.status === 401) {
           alert("Oops! You are not authorized.");
         }
@@ -61,29 +58,9 @@ class App extends Component {
     );
   }
 
-  // duplicateHits() {
-  //   const hitsArray = { ...this.state.hits };
-  //   console.log("hits", hitsArray);
-
-  //   hitsArray = hitsArray.reduce((res, current, index, array) => {
-  //     return res.concat([current, current]);
-  //   }, []);
-
-  //   this.setState({ hits: hitsArray });
-
-  //   this.setState(prevState => ({
-  //     arrayvar: [...prevState.arrayvar, newelement]
-  //   }));
-
-  //   console.log("hello?");
-  //   // console.log(hits);
-  // }
-
   shuffleArray(arr) {}
 
   render() {
-    // const { hits } = this.state;
-    // console.log("hits", hits);
     return (
       <div className="App">
         <header className="App-header">
