@@ -1,17 +1,26 @@
 import React from "react";
 
+const flexStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  margin: "0 auto 80px",
+  width: "80%"
+};
+
 const imgStyle = {
   width: "100%",
-  maxWidth: "300px",
+  maxWidth: "240px",
   objectFit: "cover",
   objectPosition: "center",
-  height: "250px"
+  height: "220px",
+  margin: "0 auto"
 };
 
 const fLeft = {
   float: "left",
-  maxWidth: "300px",
-  height: "250px",
+  maxWidth: "240px",
+  height: "220px",
   padding: "5px",
   position: "relative"
 };
@@ -26,7 +35,7 @@ const pCredit = {
   textAlign: "center",
   padding: "2px 0px 4px 0px",
   background: "rgba(0,0,0,0.5)",
-  width: "300px",
+  width: "240px",
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-around"
@@ -41,7 +50,7 @@ const creditA = {
 class Image extends React.Component {
   render() {
     return (
-      <div>
+      <div style={flexStyle}>
         {this.props.images.map((img, i) => (
           <div style={fLeft} key={i}>
             <img style={imgStyle} src={img.urls.small} alt={this.props.query} />

@@ -1,29 +1,78 @@
 import React from "react";
 import Input from "./Input.jsx";
 
-class Topics extends React.Component {
-  // constructor(props, context) {
-  //   super(props, context);
-  //   this.state = {
-  //     query:''
-  //   }
-  // }
+const flexStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "space-evenly",
+  margin: "0 auto 50px",
+  width: "50%"
+};
 
+const border = {
+  border: "3px solid #222",
+  padding: "3px",
+  width: "100px"
+};
+
+const topic = {
+  fontFamily: "'Inconsolata', monospace",
+  display: "inline-block",
+  padding: "10px",
+  width: "100px",
+  backgroundColor: "#222",
+  color: "white",
+  marginRight: "15px",
+  border: "2px solid #222",
+  fontSize: "20px"
+};
+
+const h3 = {
+  fontFamily: "'Inconsolata', monospace",
+  fontSize: "36px",
+  fontWeight: "400"
+};
+
+class Topics extends React.Component {
   render() {
     return (
       <div>
-        <h3>Select a topic</h3>
-        {/* <div className="icons">
-          <div className="topic dog" queryvalue="dogs" >Dogs</div>
-          <div className="topic city" queryvalue="city">Cities</div><br/>
-          <div className="topic coffee" queryvalue="coffee">Coffee</div><br/>
-        </div> */}
-        <Input
-          queryvalue={this.props.queryvalue}
-          queryChange={this.props.queryChange}
-        />
+        <h3 style={h3}>Select a topic</h3>
+        <div style={flexStyle}>
+          <div
+            style={topic}
+            className="topic dog"
+            onClick={e => {
+              e.preventDefault();
+              this.props.onSubmit("dogs");
+            }}
+          >
+            Dogs
+          </div>
+          <div
+            style={topic}
+            className="topic dog"
+            onClick={e => {
+              e.preventDefault();
+              this.props.onSubmit("cities");
+            }}
+          >
+            Cities
+          </div>
+          <div
+            style={topic}
+            className="topic dog"
+            onClick={e => {
+              e.preventDefault();
+              this.props.onSubmit("coffee");
+            }}
+          >
+            Coffee
+          </div>
+        </div>
+        <Input onSubmit={this.props.onSubmit} />
         {/* Assign queryvalue prop to this.state.query so that we can pass  the queryvalue prop down to the child */}
-        <h2>{this.props.queryvalue}</h2>
+        {/* <h2>{this.props.queryvalue}</h2> */}
       </div>
     );
   }

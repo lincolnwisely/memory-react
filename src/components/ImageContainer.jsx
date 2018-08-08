@@ -5,14 +5,14 @@ const flexStyle = {
   display: "flex",
   flexWrap: "wrap",
   alignContent: "space-around",
-  margin: "0 auto",
+  margin: "0 auto 80px",
   width: "80%"
 };
 
 class ImageContainer extends React.Component {
   render() {
     return (
-      <div style={flexStyle}>
+      <div>
         <Image images={this.props.images} query={this.props.query} />
       </div>
     );

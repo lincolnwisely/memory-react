@@ -1,41 +1,39 @@
 // ES Modules syntax
 import Unsplash, { toJson } from "unsplash-js";
 
-
 const unsplash = new Unsplash({
-  applicationId: "{70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a}",
+  applicationId:
+    "{70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a}",
   secret: "{2b7b2981c7b47e0e2084a751389827f01257c635ddfcd810663d8cb386f10853}",
   callbackUrl: "{http://localhost:3000/callback}"
 });
 
-
-unsplash.search.photos("dogs", 1)
+unsplash.search
+  .photos("dogs", 1)
   .then(toJson)
   .then(json => {
     console.log(json);
   });
 
-  // unsplash.photos.getRandomPhoto({ username: "naoufal" })
-  // .then(toJson)
-  // .then(json => {
-  //   // Your code
-  // });
+// unsplash.photos.getRandomPhoto({ username: "naoufal" })
+// .then(toJson)
+// .then(json => {
+//   // Your code
+// });
 
-
-
-  // componentDidMount() {
-  //   fetch('https://api.unsplash.com/photos/?client_id=' + unsplash.applicationId)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       this.setState({ imgs: data });
-  //     })
-  //     .catch(err => {
-  //       console.log('Error happened during fetching!', err);
-  //     });
-  // }
+// componentDidMount() {
+//   fetch('https://api.unsplash.com/photos/?client_id=' + unsplash.applicationId)
+//     .then(res => res.json())
+//     .then(data => {
+//       this.setState({ imgs: data });
+//     })
+//     .catch(err => {
+//       console.log('Error happened during fetching!', err);
+//     });
+// }
 
 // ----- START RANT
-//IDK WHAT TO DO WIHT THIS BUT IT HAS TO BE SOMETHING RIGHT??? 
+//IDK WHAT TO DO WIHT THIS BUT IT HAS TO BE SOMETHING RIGHT???
 // function handleRequest(){
 //   if(this.readyState == 4 && this.status == 200){ //Explain this in a bit.
 //   console.log(JSON.parse(request.responseText));
@@ -50,7 +48,7 @@ unsplash.search.photos("dogs", 1)
 // request.setRequestHeader('Authorization','Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'); // Unique client ID.
 // request.send();
 
-// ----- END RAND 
+// ----- END RAND
 
 let authenticationUrl = unsplash.auth.getAuthenticationUrl([
   "public",
@@ -71,7 +69,8 @@ collections();
 stats();
 
 function userAuthentication(code) {
-  return unsplash.auth.userAuthentication(code)
+  return unsplash.auth
+    .userAuthentication(code)
     .then(toJson)
     .then(json => json.access_token);
 }
@@ -79,86 +78,97 @@ function userAuthentication(code) {
 function currentUser() {
   console.log("\nCurrent User");
 
-  unsplash.currentUser.profile()
+  unsplash.currentUser
+    .profile()
     .then(toJson)
     .then(json => {
-      console.log('profile', json);
+      console.log("profile", json);
     });
 
-  unsplash.currentUser.updateProfile({ location: "¯\_(ツ)_/¯" })
+  unsplash.currentUser
+    .updateProfile({ location: "¯_(ツ)_/¯" })
     .then(toJson)
     .then(json => {
-      console.log('updateProfile', json);
+      console.log("updateProfile", json);
     });
 }
 
 function users() {
-  console.log("\nUsers")
+  console.log("\nUsers");
 
-  unsplash.users.profile('naoufal')
+  unsplash.users
+    .profile("naoufal")
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.users.photos("naoufal")
+  unsplash.users
+    .photos("naoufal")
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.users.likes("naoufal")
+  unsplash.users
+    .likes("naoufal")
     .then(toJson)
     .then(json => {
       console.log(json);
-     });
+    });
 }
 
 function photos() {
   console.log("\nPhotos");
 
-  unsplash.photos.listPhotos(1, 10)
+  unsplash.photos
+    .listPhotos(1, 10)
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.photos.searchPhotos("bear", undefined, 1, 1)
+  unsplash.photos
+    .searchPhotos("bear", undefined, 1, 1)
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.photos.getPhoto("kZ8dyUT0h30")
+  unsplash.photos
+    .getPhoto("kZ8dyUT0h30")
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.photos.getRandomPhoto({ featured: true })
+  unsplash.photos
+    .getRandomPhoto({ featured: true })
     .then(toJson)
     .then(json => {
       console.log(json.links.html);
     });
-
 }
 
 function categories() {
   console.log("\nCategories");
 
-  unsplash.categories.listCategories()
+  unsplash.categories
+    .listCategories()
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.categories.category(4)
+  unsplash.categories
+    .category(4)
     .then(toJson)
     .then(json => {
       console.log(json);
     });
 
-  unsplash.categories.categoryPhotos(4, 1, 1)
+  unsplash.categories
+    .categoryPhotos(4, 1, 1)
     .then(toJson)
     .then(json => {
       console.log(json);
@@ -168,65 +178,66 @@ function categories() {
 function collections() {
   console.log("\nCollections");
 
-   unsplash.collections.listCollections(1, 10)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
+  unsplash.collections
+    .listCollections(1, 10)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 
-   unsplash.collections.listCuratedCollections(1, 10)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
+  unsplash.collections
+    .listCuratedCollections(1, 10)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 
-   unsplash.collections.getCollection(151165)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
+  unsplash.collections
+    .getCollection(151165)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 
-   unsplash.collections.getCuratedCollection(94)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
+  unsplash.collections
+    .getCuratedCollection(94)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 
+  unsplash.collections
+    .getCollectionPhotos(151165)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 
-   unsplash.collections.getCollectionPhotos(151165)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
+  unsplash.collections
+    .getCuratedCollectionPhotos(94)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 
-   unsplash.collections.getCuratedCollectionPhotos(94)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
-
-   unsplash.collections.createCollection("Birds", "Wild birds from 'round the world", true)
-     .then(toJson)
-     .then(json => {
-       console.log(json);
-     });
-
+  unsplash.collections
+    .createCollection("Birds", "Wild birds from 'round the world", true)
+    .then(toJson)
+    .then(json => {
+      console.log(json);
+    });
 }
-
-
 
 class ImageContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       data: []
-    }
+    };
     // this._unSplash = this._unSplash.bind(this);
     // this._buildImages = this._buildImages.bind(this);
     // this._fetchdata = this._fetchdata.bind(this);
-
   }
-
 
   render() {
     return (
@@ -235,50 +246,49 @@ class ImageContainer extends Component {
         {/* {this._unSplash()} */}
         {/* {this._fetchdata()} */}
       </div>
-    )
+    );
   }
-  
 
-
-  _fetchdata (query) {
+  _fetchdata(query) {
     let url = `https://api.unsplash.com/search/photos/?query=` + query;
     fetch(url, {
       method: "GET",
       headers: {
-        "Authorization" :'Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'
-      },
-    }).then((res) => {
-      if (res.ok) {
-        // Convert response to Json
-        res.json().then((data) => {
-
-          // this.setState() => {
-          //   data: data.results
-          // };
-          // data = data.results;
-          console.log(p)
-          // let mapImages = this.data.map((item, i) => {
-          //   return (<Image className='img' src={ item.urls.small } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
-          //   }
-          // );
-          // console.log(mapImages);
-  
-          return ;
-          
-        });
-      } else if (res.status == 401) {
-      alert("Oops! You are not authorized.");
+        Authorization:
+          "Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a"
       }
-    }, function(e) {
-      alert("Error submitting form!");
-  });
-  
-  }
+    }).then(
+      res => {
+        if (res.ok) {
+          // Convert response to Json
+          res.json().then(data => {
+            // this.setState() => {
+            //   data: data.results
+            // };
+            // data = data.results;
+            console.log(p);
+            // let mapImages = this.data.map((item, i) => {
+            //   return (<Image className='img' src={ item.urls.small } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
+            //   }
+            // );
+            // console.log(mapImages);
 
+            return;
+          });
+        } else if (res.status == 401) {
+          alert("Oops! You are not authorized.");
+        }
+      },
+      function(e) {
+        alert("Error submitting form!");
+      }
+    );
+  }
 
   _unSplash() {
     var _handleRequest = () => {
-      if(this.readyState === 4 && this.status === 200){ //Explain this in a bit.
+      if (this.readyState === 4 && this.status === 200) {
+        //Explain this in a bit.
         var response = JSON.parse(request.responseText);
         var arr = [];
         // console.log(arr);
@@ -289,17 +299,22 @@ class ImageContainer extends Component {
         }
         console.log(arr);
 
-
         this.setState({
-          data: arr 
+          data: arr
         });
-        
+
         console.log(this.state.data);
 
         let mapImages = this.state.data.map((item, i) => {
-          return (<Image src={ item.links.self } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
-          }
-        );
+          return (
+            <Image
+              src={item.links.self}
+              uName={item.user.name}
+              uLink={item.user.links.self}
+              key={item.id}
+            />
+          );
+        });
         console.log(mapImages);
 
         return mapImages;
@@ -310,22 +325,22 @@ class ImageContainer extends Component {
     let url = "https://api.unsplash.com/search/photos/?query=dog";
     var request = new XMLHttpRequest();
     request.onreadystatechange = _handleRequest;
-    request.open('GET',url,true);
-    request.setRequestHeader('Authorization','Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'); // Unique client ID.
+    request.open("GET", url, true);
+    request.setRequestHeader(
+      "Authorization",
+      "Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a"
+    ); // Unique client ID.
     request.send();
   }
 
-
-
-
-  //id, links.self, user.links.self, user.name 
+  //id, links.self, user.links.self, user.name
 
   _buildImages(array) {
-
     let mapImages = array.map((item, i) => {
-      return (<Image src={ item.src } credit={ item.author } link={ item.link } key={i}/>);
-      }
-    );
+      return (
+        <Image src={item.src} credit={item.author} link={item.link} key={i} />
+      );
+    });
     return mapImages;
   }
 }
@@ -335,15 +350,18 @@ class ImageContainer extends Component {
 
 // The fetching component should be a common parent component for all these components.
 // The loading indicator could be shown in the common parent component from the first criteria.
-// The componentDidMount() lifecycle method is the best place to fetch data. 
-
+// The componentDidMount() lifecycle method is the best place to fetch data.
 
 // Parent container (need to store an array of data from fetch function)
-  
-  // Topics component
-      // input (onChange event determines query value, and click event will call the fetch method, passing along the query)
-      // 
-      // (future feature:)  pre-defined buttons (click event determines query value... will need to refactor)
 
-  // Image container component 
-      // images (data array item : src, author name author src, unsplash)
+// Topics component
+// input (onChange event determines query value, and click event will call the fetch method, passing along the query)
+//
+// (future feature:)  pre-defined buttons (click event determines query value... will need to refactor)
+
+// Image container component
+// images (data array item : src, author name author src, unsplash)
+
+// Need to figure out how I can prevent child component (image container, images) from rendering until the data is present in state.
+
+// Have basic intro with input, route user to url with input url??

@@ -3,9 +3,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import Topics from "./components/Topics.jsx";
 import { shuffle } from "./helpers.js";
+import { getData } from "./helpers.js";
 import ImageContainer from "./components/ImageContainer.jsx";
 
-const API = "https://api.unsplash.com/search/photos/?query=";
+const bodyStyles = {
+  fontFamily: "'Inconsolata', monospace",
+  textAlign: "center",
+  fontSize: "20px",
+  position: "relative",
+  minHeight: "100vh"
+};
 
 class App extends Component {
   constructor(props) {
@@ -13,19 +20,18 @@ class App extends Component {
 
     this.state = {
       hits: [],
-      query: "dogs"
+      query: "banana"
     };
 
-    this.queryChange = this.queryChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  queryChange(e) {
-    var querVal = e.target.value;
-    this.setState({ query: querVal });
+  onSubmit(query) {
+    this.getData(query);
   }
 
-  componentDidMount() {
-    fetch(API + this.state.query, {
+  getData(query) {
+    fetch("https://api.unsplash.com/search/photos/?query=" + query, {
       method: "GET",
       headers: {
         Authorization:
@@ -44,7 +50,7 @@ class App extends Component {
 
             shuffle(hits);
 
-            this.setState({ hits });
+            this.setState({ query, hits });
 
             console.log("hits", hits);
           });
@@ -58,19 +64,18 @@ class App extends Component {
     );
   }
 
-  shuffleArray(arr) {}
+  componentDidMount() {
+    this.getData(this.state.query);
+  }
 
   render() {
     return (
-      <div className="App">
+      <div className="App" style={bodyStyles}>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h3>Select a topic</h3>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Topics queryvalue={this.state.query} queryChange={this.queryChange} />
+        <Topics onSubmit={this.onSubmit} />
         <ImageContainer
           images={this.state.hits}
           query={this.state.query}

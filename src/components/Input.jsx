@@ -1,25 +1,30 @@
 import React from "react";
 
+const formSection = {};
+
 class Input extends React.Component {
-  searchForQuery(event) {
-    event.preventDefault();
-    const query = this.queryInput.value;
-    console.log(query);
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      query: "dog"
+    };
   }
 
   render() {
     return (
-      <div>
+      <div className="formSection">
         <span>Or choose your own!</span>
-        <form className="query-selector" onSubmit={e => this.searchForQuery(e)}>
+        <form
+          className="query-selector"
+          onSubmit={e => {
+            e.preventDefault();
+            this.props.onSubmit(this.state.query);
+          }}
+        >
           <input
             id="search"
             type="text"
-            value={this.props.queryvalue}
-            onChange={this.props.queryChange}
-            ref={input => {
-              this.queryInput = input;
-            }}
+            onChange={e => this.setState({ query: e.target.value })}
           />
           <button>Enter</button>
         </form>

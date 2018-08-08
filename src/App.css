@@ -1,24 +1,69 @@
 .App {
-  text-align: center; }
+  font-family: "Inconsolata", monospace;
+  text-align: center;
+  font-size: 20px;
+  position: relative;
+  min-height: 100vh;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px; }
+  height: 80px;
+}
 
 .App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white; }
+  color: white;
+}
 
 .App-title {
-  font-size: 1.5em; }
+  font-size: 1.5em;
+}
 
 .App-intro {
-  font-size: large; }
+  font-size: large;
+}
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg); }
+    transform: rotate(0deg);
+  }
   to {
-    transform: rotate(360deg); } }
+    transform: rotate(360deg);
+  }
+}
+
+.formSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+/* Search form */
+
+input#search {
+  border: none;
+  border-bottom: 2px solid #222;
+  font-family: "Inconsolata", monospace;
+  text-align: center;
+  font-size: 20px;
+}
+
+input#search:focus {
+  outline: none;
+  border-bottom: 2px solid #222;
+}
+
+input#search:focus {
+  outline: none;
+  border-bottom: 2px solid #222;
+}
+
+button {
+  font-family: "Inconsolata", monospace;
+  border: 2px solid #222;
+  margin-left: 10px;
+  outline: none;
+}
