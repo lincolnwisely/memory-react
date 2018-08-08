@@ -5,7 +5,7 @@ const flexStyle = {
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "space-evenly",
-  margin: "0 auto 50px",
+  margin: "0 auto 30px",
   width: "50%"
 };
 

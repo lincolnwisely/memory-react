@@ -14,14 +14,15 @@ const imgStyle = {
   objectFit: "cover",
   objectPosition: "center",
   height: "220px",
-  margin: "0 auto"
+  margin: "0 auto",
+  border: "3px solid #222"
 };
 
 const fLeft = {
   float: "left",
   maxWidth: "240px",
   height: "220px",
-  padding: "5px",
+  padding: "7px",
   position: "relative"
 };
 
@@ -29,13 +30,13 @@ const pCredit = {
   fontFamily: "'Inconsolata', monospace",
   color: "#ffffff",
   position: "absolute",
-  bottom: "5px",
+  bottom: "2px",
   margin: "0",
   fontSize: "10px",
   textAlign: "center",
   padding: "2px 0px 4px 0px",
   background: "rgba(0,0,0,0.5)",
-  width: "240px",
+  width: "243px",
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-around"

@@ -14,6 +14,15 @@ const bodyStyles = {
   minHeight: "100vh"
 };
 
+const h1 = {
+  padding: "20px",
+  width: "50%",
+  textAlign: "center",
+  margin: "30px auto",
+  border: "3px solid #222",
+  boxShadow: "10px 10px #222"
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -71,10 +80,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" style={bodyStyles}>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h3>Select a topic</h3>
-        </header>
+        <h1 style={h1}>Memory Game</h1>
         <Topics onSubmit={this.onSubmit} />
         <ImageContainer
           images={this.state.hits}
