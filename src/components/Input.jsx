@@ -6,7 +6,7 @@ class Input extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      query: "dog"
+      active: "dog"
     };
   }
 

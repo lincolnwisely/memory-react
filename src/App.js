@@ -5,6 +5,7 @@ import Topics from "./components/Topics.jsx";
 import { shuffle } from "./helpers.js";
 import { getData } from "./helpers.js";
 import ImageContainer from "./components/ImageContainer.jsx";
+import Footer from "./components/Footer.jsx";
 
 const bodyStyles = {
   fontFamily: "'Inconsolata', monospace",
@@ -87,6 +88,7 @@ class App extends Component {
           query={this.state.query}
           duplicateHits={this.duplicateHits}
         />
+        <Footer />
       </div>
     );
   }

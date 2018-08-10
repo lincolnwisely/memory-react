@@ -51,31 +51,27 @@ const creditA = {
 class Image extends React.Component {
   render() {
     return (
-      <div style={flexStyle}>
-        {this.props.images.map((img, i) => (
-          <div style={fLeft} key={i}>
-            <img style={imgStyle} src={img.urls.small} alt={this.props.query} />
-            <p className="credit" style={pCredit}>
-              <a
-                style={creditA}
-                href="https://unsplash.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                via Unsplash
-              </a>
-              <br />
-              <a
-                style={creditA}
-                href={img.user.links.self}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {img.user.name}
-              </a>
-            </p>
-          </div>
-        ))}
+      <div style={fLeft}>
+        <img style={imgStyle} src={this.props.src} alt={this.props.alt} />
+        <p className="credit" style={pCredit}>
+          <a
+            style={creditA}
+            href="https://unsplash.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            via Unsplash
+          </a>
+          <br />
+          <a
+            style={creditA}
+            href={this.props.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {this.props.user}
+          </a>
+        </p>
       </div>
     );
   }
