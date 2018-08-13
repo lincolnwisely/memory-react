@@ -10,18 +10,6 @@ const flexStyle = {
 };
 
 class ImageContainer extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      active: false
-    };
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    this.setState({ active: true });
-  }
-
   render() {
     return (
       <div style={flexStyle}>
@@ -30,7 +18,6 @@ class ImageContainer extends React.Component {
             key={i}
             src={img.urls.small}
             alt={this.props.query}
-            onClick={e => this.handleClick(e)}
             href={img.user.links.self}
             user={img.user.name}
             query={this.props.query}

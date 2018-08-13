@@ -1,61 +1,64 @@
 import React from "react";
 
-const flexStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  margin: "0 auto 80px",
-  width: "80%"
+const imgActive = {
+  border: "2px solid hotpink",
+  outline: "3px solid hotpink",
+  outlineOffset: "-4px"
 };
 
-const imgStyle = {
-  width: "100%",
-  maxWidth: "240px",
-  objectFit: "cover",
-  objectPosition: "center",
-  height: "220px",
-  margin: "0 auto",
-  border: "3px solid #222"
+const imgInactive = {
+  border: "3px solid #222",
+  display: "none"
 };
 
-const fLeft = {
-  float: "left",
-  maxWidth: "240px",
-  height: "220px",
-  padding: "7px",
-  position: "relative"
-};
-
-const pCredit = {
+const creditActive = {
   fontFamily: "'Inconsolata', monospace",
   color: "#ffffff",
   position: "absolute",
-  bottom: "2px",
+  bottom: "0",
+  left: "4px",
   margin: "0",
   fontSize: "10px",
-  textAlign: "center",
   padding: "2px 0px 4px 0px",
   background: "rgba(0,0,0,0.5)",
-  width: "243px",
+  width: "236px",
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-around"
-  // display: none;
 };
 
-const creditA = {
-  color: "#ffffff",
-  fontSize: "10px"
+const creditInactive = {
+  display: "none"
 };
 
 class Image extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      active: false
+    };
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    console.log(this.state);
+    this.setState({ active: true });
+  }
+  // click event is only firing when state active is already set to true...
+
   render() {
     return (
-      <div style={fLeft}>
-        <img style={imgStyle} src={this.props.src} alt={this.props.alt} />
-        <p className="credit" style={pCredit}>
+      <div className="imgWrap" onClick={e => this.handleClick(e)}>
+        <img
+          style={this.state.active === false ? imgInactive : imgActive}
+          src={this.props.src}
+          alt={this.props.alt}
+        />
+        <p
+          className="credit"
+          style={this.state.active === false ? creditInactive : creditActive}
+        >
           <a
-            style={creditA}
             href="https://unsplash.com/"
             target="_blank"
             rel="noopener noreferrer"
@@ -63,12 +66,7 @@ class Image extends React.Component {
             via Unsplash
           </a>
           <br />
-          <a
-            style={creditA}
-            href={this.props.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={this.props.href} target="_blank" rel="noopener noreferrer">
             {this.props.user}
           </a>
         </p>
