@@ -1,7 +1,5 @@
 import React from "react";
 
-const formSection = {};
-
 class Input extends React.Component {
   constructor(props, context) {
     super(props, context);

@@ -9,12 +9,6 @@ const flexStyle = {
   width: "50%"
 };
 
-const border = {
-  border: "3px solid #222",
-  padding: "3px",
-  width: "100px"
-};
-
 const topic = {
   fontFamily: "'Inconsolata', monospace",
   display: "inline-block",
