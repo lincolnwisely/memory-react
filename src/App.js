@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Topics from "./components/Topics.jsx";
 import { shuffle } from "./helpers.js";

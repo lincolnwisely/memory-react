@@ -41,10 +41,13 @@ class Image extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
+    const img = this.props.src;
     console.log(this.state);
     this.setState({ active: true });
+    this.props.addActiveImage(img);
   }
   // click event is only firing when state active is already set to true...
+  // ...because the click event was set on img, which doesn't display when active: false
 
   render() {
     return (

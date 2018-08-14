@@ -10,6 +10,23 @@ const flexStyle = {
 };
 
 class ImageContainer extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      activeImages: []
+    };
+
+    this.addActiveImage = this.addActiveImage.bind(this);
+  }
+
+  addActiveImage(img) {
+    console.log(this.state);
+    const activeImages = { ...this.state.activeImages };
+    const timestamp = Date.now();
+    activeImages[`img-${timestamp}`] = img;
+    this.setState({ activeImages: activeImages });
+  }
+
   render() {
     return (
       <div style={flexStyle}>
@@ -21,6 +38,7 @@ class ImageContainer extends React.Component {
             href={img.user.links.self}
             user={img.user.name}
             query={this.props.query}
+            addActiveImage={this.addActiveImage}
           />
         ))}
       </div>
