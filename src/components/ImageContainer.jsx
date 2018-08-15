@@ -17,14 +17,33 @@ class ImageContainer extends React.Component {
     };
 
     this.addActiveImage = this.addActiveImage.bind(this);
+    this.compareActiveImages = this.compareActiveImages.bind(this);
   }
 
   addActiveImage(img) {
     console.log(this.state);
-    const activeImages = { ...this.state.activeImages };
-    const timestamp = Date.now();
-    activeImages[`img-${timestamp}`] = img;
-    this.setState({ activeImages: activeImages });
+    console.log(img);
+    // const activeImages = { ...this.state.activeImages };
+    this.setState({ activeImages: this.state.activeImages.concat(img) });
+
+    // this.setState({ activeImages: [...this.state.activeImages, img] }); //simple value
+
+    // this option adds objects to the activeImages array. Each object has a unique key. Can only work if I compare just the value... ugh
+    // const timestamp = Date.now();
+    // activeImages[`img-${timestamp}`] = img;
+    // this.setState({ activeImages: activeImages });
+  }
+
+  compareActiveImages() {
+    if (
+      this.state.activeImages[1] === this.state.activeImages[2]
+    ) {
+      console.log("it's a match!!");
+      // somehow make both images permanently visible...
+    } else {
+      this.setState({ activeImages: [] });
+      // hide images again...
+    }
   }
 
   render() {
@@ -33,12 +52,14 @@ class ImageContainer extends React.Component {
         {this.props.images.map((img, i) => (
           <Image
             key={i}
+            id={img.id}
             src={img.urls.small}
             alt={this.props.query}
             href={img.user.links.self}
             user={img.user.name}
             query={this.props.query}
             addActiveImage={this.addActiveImage}
+            compare={this.compareActiveImages}
           />
         ))}
       </div>

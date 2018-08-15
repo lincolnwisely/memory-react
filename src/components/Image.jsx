@@ -31,6 +31,8 @@ const creditInactive = {
   display: "none"
 };
 
+// how do i determine if an image is
+
 class Image extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -44,10 +46,13 @@ class Image extends React.Component {
     const img = this.props.src;
     console.log(this.state);
     this.setState({ active: true });
-    this.props.addActiveImage(img);
+    this.props.addActiveImage(this.props.id);
+    this.props.compare();
   }
   // click event is only firing when state active is already set to true...
   // ...because the click event was set on img, which doesn't display when active: false
+
+// Move parent div to imageContainer, inside for loop. pass in img style IF IF IF image is in state.activeImages array. Somehow have to loop through that array??
 
   render() {
     return (
