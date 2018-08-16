@@ -47,8 +47,10 @@ class ImageContainer extends React.Component {
       activeImages: []
     };
 
-    // this.addActiveImage = this.addActiveImage.bind(this);
+    this.addActiveImage = this.addActiveImage.bind(this);
+    // this.applyStyle = this.applyStyle.bind(this);
     this.compareActiveImages = this.compareActiveImages.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   // handleClick(e, id) {
@@ -60,21 +62,27 @@ class ImageContainer extends React.Component {
   //   // this.props.compare();
   // }
 
-  addActiveImage(img) {
-    console.log(img)
-    // img is undefined
-    console.log(this.state);
-    console.log(this.props.images);
-    // const activeImages = { ...this.state.activeImages };
-    // this.setState({ activeImages: this.state.activeImages.concat(img) });
-    this.setState({activeImages: img});
-    // this.setState({ activeImages: [...this.state.activeImages, img] }); //simple value
 
-    // this option adds objects to the activeImages array. Each object has a unique key. Can only work if I compare just the value... ugh
-    // const timestamp = Date.now();
-    // activeImages[`img-${timestamp}`] = img;
-    // this.setState({ activeImages: activeImages });
+  handleClick(e) {
+    // var img = e.target.value;
+    console.log(e);
+    console.log(this);
+    this.addActiveImage(e);
   }
+
+  addActiveImage(obj) {
+    // const activeImages = { ...this.state.activeImages };
+    this.setState({ activeImages: this.state.activeImages.concat(obj) });
+
+  }
+
+  // applyStyle(key, value) {
+  //   let obj = {[key]: value}
+  //   console.log(obj);
+  //   this.state.activeImages.includes(obj) ? imgActive : imgInactive
+  // }
+
+
 
   compareActiveImages() {
     if (
@@ -92,9 +100,10 @@ class ImageContainer extends React.Component {
     return (
       <div style={flexStyle}>
         {this.props.images.map((img, i) => (
-          <div onClick={() => this.addActiveImage(img.id)} key={i}>
+          // <div onClick={() => this.addActiveImage({[i] : img.id})} key={i}>
+          <div key={i} >
           <Image
-            key={i}
+            img={img}
             id={img.id}
             src={img.urls.small}
             alt={this.props.query}
@@ -102,10 +111,14 @@ class ImageContainer extends React.Component {
             user={img.user.name}
             query={this.props.query}
             addActiveImage={this.addActiveImage}
-            compare={this.compareActiveImages}
-            imgStyle={this.state.activeImages.includes(img.id) ? imgActive : imgInactive }
-            creditStyle={this.state.activeImages.includes(img.id) ? creditActive : creditInactive}
+            handleClick={this.handleClick}
+            // imgStyle={this.state.activeImages.includes(img) ? imgActive : imgInactive }
 
+            // onClick={ (e) => this.handleClick(e.target) }
+
+            // compare={this.compareActiveImages}
+            // imgStyle={this.applyStyle(i, img.id) }
+            // creditStyle={this.state.activeImages.includes({i: img.id}) ? creditActive : creditInactive}
           />
           </div>
         ))}

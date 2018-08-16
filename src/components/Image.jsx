@@ -1,35 +1,5 @@
 import React from "react";
 
-// const imgActive = {
-//   border: "2px solid hotpink",
-//   outline: "3px solid hotpink",
-//   outlineOffset: "-4px"
-// };
-
-// const imgInactive = {
-//   border: "3px solid #222",
-//   display: "none"
-// };
-
-// const creditActive = {
-//   fontFamily: "'Inconsolata', monospace",
-//   color: "#ffffff",
-//   position: "absolute",
-//   bottom: "0",
-//   left: "4px",
-//   margin: "0",
-//   fontSize: "10px",
-//   padding: "2px 0px 4px 0px",
-//   background: "rgba(0,0,0,0.5)",
-//   width: "236px",
-//   display: "flex",
-//   flexDirection: "row",
-//   justifyContent: "space-around"
-// };
-
-// const creditInactive = {
-//   display: "none"
-// };
 
 // how do i determine if an image is
 
@@ -41,22 +11,9 @@ class Image extends React.Component {
     };
   }
 
-  // handleClick(e) {
-  //   e.preventDefault();
-  //   const img = this.props.src;
-  //   console.log(this.state);
-  //   this.setState({ active: true });
-  //   this.props.addActiveImage(this.props.id);
-  //   this.props.compare();
-  // }
-
-
-  // click event is only firing when state active is already set to true...
-  // ...because the click event was set on img, which doesn't display when active: false
-
-// Move parent div to imageContainer, inside for loop. pass in img style IF IF IF image is in state.activeImages array. Somehow have to loop through that array??
 
   render() {
+
     return (
       <div className="imgWrap" >
         <img
@@ -64,6 +21,8 @@ class Image extends React.Component {
           src={this.props.src}
           alt={this.props.alt}
           style={this.props.imgStyle}
+          // onClick={() => this.props.addActiveImage(this)}
+          onClick={ (e) => this.props.handleClick(this) }
         />
         <p
           className="credit"
