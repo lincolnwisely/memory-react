@@ -48,62 +48,90 @@ class ImageContainer extends React.Component {
     };
 
     this.addActiveImage = this.addActiveImage.bind(this);
-    // this.applyStyle = this.applyStyle.bind(this);
+    this.applyStyle = this.applyStyle.bind(this);
     this.compareActiveImages = this.compareActiveImages.bind(this);
     // this.handleClick = this.handleClick.bind(this);
   }
 
-  // handleClick(e, id) {
-  //   e.preventDefault();
-  //   // const img = this.props.src;
-  //   // console.log(this.state);
-  //   // this.setState({ active: true });
-  //   this.addActiveImage(id);
-  //   // this.props.compare();
+  // componentDidMount() {
   // }
 
-
   handleClick(e) {
-    // var img = e.target.value;
     console.log(e);
     console.log(this);
     this.addActiveImage(e);
+    // var className = this.state.activeImages.includes(e) ? 'active' : 'inactive'
+    // console.log(className);
   }
 
   addActiveImage(obj) {
-    // const activeImages = { ...this.state.activeImages };
     this.setState({ activeImages: this.state.activeImages.concat(obj) });
+    this.applyStyle(obj);
 
   }
 
-  // applyStyle(key, value) {
-  //   let obj = {[key]: value}
-  //   console.log(obj);
-  //   this.state.activeImages.includes(obj) ? imgActive : imgInactive
+  applyStyle(img) {
+    // this.state.activeImages.includes(img) ? imgActive : imgInactive
+    console.log('AS', this.state.activeImages);
+    console.log('AS', this);
+    console.log('AS', img);
+    var className = this.state.activeImages.includes(img) ? 'active' : 'inactive'
+    console.log(className);
+    console.log('AS2', this.state.activeImages);
+
+  }
+
+  // componentDidUpdate() {
+  //   var className = this.state.activeImages.includes(img) ? 'active' : 'inactive'
+  //   console.log(className);
   // }
+
+  componentDidUpdate()  {
+    this.compareActiveImages();
+  }
 
 
 
   compareActiveImages() {
-    if (
-      this.state.activeImages[1] === this.state.activeImages[2]
-    ) {
-      console.log("it's a match!!");
-      // somehow make both images permanently visible...
-    } else {
-      this.setState({ activeImages: [] });
-      // hide images again...
+    console.log('function was triggered');
+    if (this.state.activeImages.length === 2 ) {
+      console.log('that is two')
+      if (
+        this.state.activeImages[0].props.id === this.state.activeImages[1].props.id
+      ) {
+        console.log("it's a match!!");
+        // somehow make both images permanently visible...
+      } else {
+        this.setState({ activeImages: [] });
+        // hide images again...
+      }
     }
+
+    else {
+      console.log('either less than two, orrrr the equals 2 logic is off');
+    }
+
+    // if (
+    //   this.state.activeImages[1] === this.state.activeImages[2]
+    // ) {
+    //   console.log("it's a match!!");
+    //   // somehow make both images permanently visible...
+    // } else {
+    //   this.setState({ activeImages: [] });
+    //   // hide images again...
+    // }
   }
 
   render() {
+    console.log('line 108', this.state.activeImages);
     return (
       <div style={flexStyle}>
         {this.props.images.map((img, i) => (
           // <div onClick={() => this.addActiveImage({[i] : img.id})} key={i}>
           <div key={i} >
           <Image
-            img={img}
+            key={i}
+            // img={img}
             id={img.id}
             src={img.urls.small}
             alt={this.props.query}
@@ -111,12 +139,14 @@ class ImageContainer extends React.Component {
             user={img.user.name}
             query={this.props.query}
             addActiveImage={this.addActiveImage}
+            // applyStyle={this.applyStyle(img)}
             handleClick={this.handleClick}
-            // imgStyle={this.state.activeImages.includes(img) ? imgActive : imgInactive }
+            // imgStyle={stateAI.includes(img) ? imgActive : imgInactive }
+            className={this.state.activeImages.includes(this) ? 'active' : 'inactive' }
 
             // onClick={ (e) => this.handleClick(e.target) }
 
-            // compare={this.compareActiveImages}
+            compare={this.compareActiveImages}
             // imgStyle={this.applyStyle(i, img.id) }
             // creditStyle={this.state.activeImages.includes({i: img.id}) ? creditActive : creditInactive}
           />

@@ -13,15 +13,12 @@ class Image extends React.Component {
 
 
   render() {
-
     return (
-      <div className="imgWrap" >
+      <div className="imgWrap" className={this.props.className} >
         <img
-          // style={this.state.active === false ? imgInactive : imgActive}
           src={this.props.src}
           alt={this.props.alt}
           style={this.props.imgStyle}
-          // onClick={() => this.props.addActiveImage(this)}
           onClick={ (e) => this.props.handleClick(this) }
         />
         <p
