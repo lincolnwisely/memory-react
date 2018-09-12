@@ -1,6 +1,5 @@
 import React from "react";
 
-
 // how do i determine if an image is
 
 class Image extends React.Component {
@@ -11,20 +10,16 @@ class Image extends React.Component {
     };
   }
 
-
   render() {
     return (
-      <div className="imgWrap" className={this.props.className} >
+      <div className="imgWrap" className={this.props.className}>
         <img
           src={this.props.src}
           alt={this.props.alt}
           style={this.props.imgStyle}
-          onClick={ (e) => this.props.handleClick(this) }
+          onClick={() => this.props.handleClick(this)}
         />
-        <p
-          className="credit"
-          style={this.props.creditStyle}
-        >
+        <p className="credit" style={this.props.creditStyle}>
           <a
             href="https://unsplash.com/"
             target="_blank"

@@ -47,57 +47,58 @@ class ImageContainer extends React.Component {
       activeImages: []
     };
 
-    this.addActiveImage = this.addActiveImage.bind(this);
-    this.applyStyle = this.applyStyle.bind(this);
-    this.compareActiveImages = this.compareActiveImages.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
+    // this.addActiveImage = this.addActiveImage.bind(this);
+    // this.applyStyle = this.applyStyle.bind(this);
+    // this.compareActiveImages = this.compareActiveImages.bind(this);
   }
 
-  // componentDidMount() {
+  // handleClick(component) {
+  //   console.log('handle click', component);
+  //   this.addActiveImage(component);
+  /** Keep commented out  */
+
+  // var className = this.state.activeImages.includes(e) ? 'active' : 'inactive'
+  // console.log(className);
+  /** Keep commented out  */
+
   // }
 
-  handleClick(e) {
-    console.log(e);
-    console.log(this);
-    this.addActiveImage(e);
-    // var className = this.state.activeImages.includes(e) ? 'active' : 'inactive'
-    // console.log(className);
+  addActiveImage(component) {
+    this.setState({ activeImages: this.state.activeImages.concat(component) });
+    this.applyStyle(component);
   }
 
-  addActiveImage(obj) {
-    this.setState({ activeImages: this.state.activeImages.concat(obj) });
-    this.applyStyle(obj);
-
+  someFunction(imgComponent) {
+    this.setState({ activeImages: { img: imgComponent, status: false } });
   }
 
   applyStyle(img) {
-    // this.state.activeImages.includes(img) ? imgActive : imgInactive
-    console.log('AS', this.state.activeImages);
-    console.log('AS', this);
-    console.log('AS', img);
-    var className = this.state.activeImages.includes(img) ? 'active' : 'inactive'
-    console.log(className);
-    console.log('AS2', this.state.activeImages);
-
+    /** Keep commented out  */
+    // var className = this.state.activeImages.includes(img) ? 'active' : 'inactive'
+    // console.log(className);
+    /** Keep commented out  */
   }
 
+  /** Keep commented out  */
   // componentDidUpdate() {
   //   var className = this.state.activeImages.includes(img) ? 'active' : 'inactive'
   //   console.log(className);
   // }
+  /** Keep commented out  */
 
-  componentDidUpdate()  {
+  //issues:
+
+  componentDidUpdate() {
     this.compareActiveImages();
   }
 
-
-
   compareActiveImages() {
-    console.log('function was triggered');
-    if (this.state.activeImages.length === 2 ) {
-      console.log('that is two')
+    console.log("function was triggered");
+    if (this.state.activeImages.length === 2) {
+      console.log("that is two");
       if (
-        this.state.activeImages[0].props.id === this.state.activeImages[1].props.id
+        this.state.activeImages[0].props.id ===
+        this.state.activeImages[1].props.id
       ) {
         console.log("it's a match!!");
         // somehow make both images permanently visible...
@@ -105,12 +106,11 @@ class ImageContainer extends React.Component {
         this.setState({ activeImages: [] });
         // hide images again...
       }
+    } else {
+      console.log("either less than two, orrrr the equals 2 logic is off");
     }
 
-    else {
-      console.log('either less than two, orrrr the equals 2 logic is off');
-    }
-
+    /** Keep commented out  */
     // if (
     //   this.state.activeImages[1] === this.state.activeImages[2]
     // ) {
@@ -120,15 +120,14 @@ class ImageContainer extends React.Component {
     //   this.setState({ activeImages: [] });
     //   // hide images again...
     // }
+    /** Keep commented out  */
   }
 
   render() {
-    console.log('line 108', this.state.activeImages);
     return (
       <div style={flexStyle}>
         {this.props.images.map((img, i) => (
           // <div onClick={() => this.addActiveImage({[i] : img.id})} key={i}>
-          <div key={i} >
           <Image
             key={i}
             // img={img}
@@ -138,19 +137,19 @@ class ImageContainer extends React.Component {
             href={img.user.links.self}
             user={img.user.name}
             query={this.props.query}
-            addActiveImage={this.addActiveImage}
+            addActiveImage={this.props.addActiveImage}
             // applyStyle={this.applyStyle(img)}
-            handleClick={this.handleClick}
-            // imgStyle={stateAI.includes(img) ? imgActive : imgInactive }
-            className={this.state.activeImages.includes(this) ? 'active' : 'inactive' }
-
+            handleClick={this.props.handleClick}
+            // imgStyle={this.state.activeImages.includes(img) ? imgActive : imgInactive }
+            className={
+              this.state.activeImages.includes(this) ? "active" : "inactive"
+            }
             // onClick={ (e) => this.handleClick(e.target) }
 
-            compare={this.compareActiveImages}
+            compare={this.props.compareActiveImages}
             // imgStyle={this.applyStyle(i, img.id) }
             // creditStyle={this.state.activeImages.includes({i: img.id}) ? creditActive : creditInactive}
           />
-          </div>
         ))}
       </div>
     );
