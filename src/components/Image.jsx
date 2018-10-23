@@ -16,13 +16,15 @@ class Image extends React.Component {
     return (
 
 
-      <div className={`imgWrap active-${this.state.active}`}>
+      <div className={`imgWrap active-${this.state.active}`}
+      onClick={() => this.props.handleClick(this)}
+      >
         <img
           src={this.props.src}
           alt={this.props.alt}
           style={this.props.imgStyle}
-          onClick={() => this.props.handleClick(this)}
         />
+
         <p className="credit" style={this.props.creditStyle}>
           <a
             href="https://unsplash.com/"

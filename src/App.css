@@ -92,10 +92,18 @@ img {
 }
 
 
-.active-false {
-  background: black;
-}
-
 .active-true {
   background: transparent;
+}
+
+/* Click Style Toggle */
+.imgWrap.active-false:after {
+  content: '';
+  background: #000;
+  height: 300px;
+  width: 240px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
