@@ -68,11 +68,13 @@ button {
 .imgWrap {
   max-width: 240px;
   width: 240px;
-  height: 220px;
+  height: 300px;
   margin: 7px;
   /* padding: 7px; */
   position: relative;
   background: #222;
+  display: flex;
+  flex-direction: column;
 }
 
 img {
@@ -87,4 +89,13 @@ img {
 .credit a {
   color: "#ffffff";
   font-size: 10px;
+}
+
+
+.active-false {
+  background: black;
+}
+
+.active-true {
+  background: transparent;
 }

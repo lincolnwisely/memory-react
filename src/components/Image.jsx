@@ -6,13 +6,17 @@ class Image extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      active: false
+      active: false,
+      matched: false
     };
   }
 
+
   render() {
     return (
-      <div className="imgWrap" className={this.props.className}>
+
+
+      <div className={`imgWrap active-${this.state.active}`}>
         <img
           src={this.props.src}
           alt={this.props.alt}

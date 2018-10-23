@@ -107,7 +107,7 @@ class ImageContainer extends React.Component {
         // hide images again...
       }
     } else {
-      console.log("either less than two, orrrr the equals 2 logic is off");
+      console.log("either less than 2, orrrr the equals 2 logic is off");
     }
 
     /** Keep commented out  */
@@ -132,6 +132,7 @@ class ImageContainer extends React.Component {
             key={i}
             // img={img}
             id={img.id}
+            active={img.active}
             src={img.urls.small}
             alt={this.props.query}
             href={img.user.links.self}

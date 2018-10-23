@@ -23,6 +23,8 @@ const h1 = {
   boxShadow: "10px 10px #222"
 };
 
+// make active, matched, eligible  properties in hits array object
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,7 @@ class App extends Component {
     this.state = {
       hits: [],
       query: "banana",
+      eligibleImages: [],
       activeImages: [],
       solvedImages: []
     };
@@ -56,17 +59,22 @@ class App extends Component {
         if (response.ok) {
           response.json().then(data => {
             let hits = data.results;
-
+            hits.forEach(function(obj) {
+              obj.active = false;
+              obj.matched = false;
+            });
             // Duplicate array before passing to state.
             hits = hits.reduce((res, current, index, array) => {
               return res.concat([current, current]);
             }, []);
 
+            // helper function to add new data properties to Hits objects
             shuffle(hits);
 
             this.setState({ query, hits });
 
             console.log("hits", hits);
+
           });
         } else if (response.status === 401) {
           alert("Oops! You are not authorized.");
@@ -89,6 +97,14 @@ class App extends Component {
   compareActiveImages() {
     console.log("function was triggered");
     console.log("active state", this.state.activeImages);
+    console.log("app this", this);
+
+    var activeImages = [];
+    this.state.hits.forEach(function(item) {
+      // idea was that i would check for active true and add to array...
+      console.log(item);
+      console.log('goddamnit, this is the hits obj not the component');
+    });
     if (this.state.activeImages.length === 2) {
       console.log("that is two");
       if (
@@ -97,6 +113,8 @@ class App extends Component {
       ) {
         console.log("it's a match!!");
         this.state.solvedImages.push(this.state.activeImages);
+        this.setState({ activeImages: [] });
+
         // somehow make both images permanently visible...
       } else {
         this.setState({ activeImages: [] });
@@ -117,9 +135,45 @@ class App extends Component {
     // }
   }
 
+  // populateEligibleImages() {
+  //   this.setState({})
+  // }
+
+  // Do i need to make an image object that will house the:
+  // - Image ID
+  // - Image user name
+  // - Image user href
+  // - Image src
+  // Flip status ('active')
+  // Matched status
+  //
+
+  // img = {
+  //   id: '',
+  //   user: '',
+  //   userHref: '',
+  //   src: '',
+  //   active: false,
+  //   matched: false
+  // }
+
+  // AS OF RIGHT NOW OCTOBER 22...
+  // CLICKING ON AN IMAGE CHANGES ITS STATE (IMG COMPONENT) TO ACTIVE: TRUE
+  // ALSO ADDS A CLASS OF ACTIVE-TRUE
+// BUT HOW DO I COMPARE THE STATE ON THE PARENT LEVEL WHEN I AM UNABLE TO CHANGE THE ACTIVE PROPERTY ON THE HITS OBJECTS???
   handleClick(component) {
     console.log("handle click", component);
-    this.addActiveImage(component);
+    // this.addActiveImage(component);
+    if (component.state.active == true ) {
+      component.setState({active: false});
+
+    } else {
+      component.setState({active: true});
+
+    }
+    console.log('this',this);
+
+
     // var className = this.state.activeImages.includes(e) ? 'active' : 'inactive'
     // console.log(className);
   }

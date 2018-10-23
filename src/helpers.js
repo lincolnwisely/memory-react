@@ -10,6 +10,15 @@ export function shuffle(a) {
   return a;
 }
 
+// export function addProps(array, object) {
+//   for (i = 0; i < array.length; i++) {
+//     object
+//   }
+
+//   array.forEach(function() {
+
+//   })
+// }
 // export function getData(query) {
 //   fetch("https://api.unsplash.com/search/photos/?query=" + query, {
 //     method: "GET",
